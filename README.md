@@ -1,69 +1,69 @@
-# Barómetro Giro-Sur (Plasma Applet)
+# Giro-Sur Barometer (Plasma Applet)
 
-**Barómetro Giro-Sur** es un widget analógico aneroide marino para KDE Plasma que muestra la presión atmosférica en tiempo real con una interfaz clásica y detallada.
+**Giro-Sur Barometer** is an analog marine aneroid widget for KDE Plasma that displays real-time atmospheric pressure with a classic, highly detailed interface.
 
-Inspirado en los barómetros náuticos tradicionales, combina el encanto de la instrumentación física con datos meteorológicos actualizados automáticamente.
-
----
-
-## 🌟 Características Principales
-
-- 🌊 **Dial Marino Aneróide**: Estilo gráfico realista calibrado en hectopascales (hPa) con indicaciones de estado del tiempo (*Stormy, Rain, Change, Fair, Very Dry*).
-- 🔵 **Aguja de Presión Actual**: Aguja indicadora animada que responde en tiempo real a las variaciones de presión atmosférica.
-- 🟡 **Aguja de Referencia (Memoria)**: Aguja dorada secundaria para comparar manualmente la tendencia de la presión desde una lectura anterior.
-- 📈 **Tendencia de 3 Horas**: Muestra si la presión atmosférica está subiendo, estable o cayendo (útil para predecir frentes meteorológicos y tormentas).
-- 🌐 **Datos Meteorológicos Globales**: Integración con la API pública de **Open-Meteo**, con búsqueda sencilla de ciudades y coordenadas.
-- ⚙️ **Configuración Flexible**: Selector de ubicación intuitivo con previsualización del estado del sensor y frecuencia de actualización parametrizable.
-- 🖥️ **Compatibilidad Plasma**: Diseñado para funcionar en el escritorio, paneles o docks de KDE Plasma 5 y 6.
+Inspired by traditional nautical barometers, it combines the aesthetic charm of physical instrumentation with automatically updated weather data.
 
 ---
 
-## 📋 Requisitos
+## 🌟 Key Features
 
-- KDE Plasma 5.24+ o Plasma 6
+- 🌊 **Aneroid Marine Dial**: Realistic graphical style calibrated in hectopascals (hPa) with weather condition indicators (*Stormy, Rain, Change, Fair, Very Dry*).
+- 🔵 **Current Pressure Hand**: Smoothly animated blue pointer that responds to real-time atmospheric pressure variations.
+- 🟡 **Reference (Memory) Hand**: Secondary gold hand to manually benchmark pressure trends against previous readings.
+- 📈 **3-Hour Pressure Trend**: Shows whether atmospheric pressure is rising, steady, or falling (essential for forecasting weather fronts and storms).
+- 🌐 **Global Weather Data**: Powered by the public **Open-Meteo API**, featuring easy city search and geographic coordinate lookup.
+- ⚙️ **Flexible Configuration**: Intuitive location picker with live sensor state preview and customizable update frequency.
+- 🖥️ **Plasma Compatibility**: Designed to work seamlessly on KDE Plasma 5 and 6 desktops, panels, and docks.
+
+---
+
+## 📋 Requirements
+
+- KDE Plasma 5.24+ or Plasma 6
 - Qt / KDE Frameworks
-- Herramienta de empaquetado de Plasma (`kpackagetool5` o `kpackagetool6`)
+- Plasma package tool (`kpackagetool5` or `kpackagetool6`)
 
 ---
 
-## 🛠️ Instalación
+## 🛠️ Installation
 
-### Opción A: Instalación directa desde la fuente (Terminal)
+### Option A: From source (Terminal)
 
-1. Clonar o descargar este repositorio:
+1. Clone or download this repository:
    ```bash
    git clone https://github.com/teovisaires/girosur-barometer.git
    cd girosur-barometer
    ```
 
-2. Ejecutar el comando de instalación para KDE Plasma:
+2. Run the installation command for KDE Plasma:
    ```bash
-   # En KDE Plasma 5:
+   # On KDE Plasma 5:
    kpackagetool5 -t Plasma/Applet -i .
 
-   # En KDE Plasma 6:
+   # On KDE Plasma 6:
    kpackagetool6 -t Plasma/Applet -i .
    ```
 
-3. Si ya estaba instalado y deseas actualizarlo:
+3. To update an existing installation:
    ```bash
    kpackagetool5 -t Plasma/Applet -u .
    ```
 
-### Opción B: Instalación desde paquete `.plasmoid`
+### Option B: From `.plasmoid` package
 
-1. Descargar el archivo `girosur-barometer-1.0.0.plasmoid` desde la sección de [Releases](https://github.com/teovisaires/girosur-barometer/releases).
-2. Hacer clic derecho sobre el panel de tu escritorio KDE -> **Añadir elementos gráficos...** -> **Obtener nuevos elementos gráficos...** -> **Instalar desde archivo local...** y seleccionar el archivo `.plasmoid`.
-
----
-
-## 📄 Licencia
-
-Este proyecto está distribuido bajo la licencia **GNU General Public License v2.0 or later (GPL-2.0-or-later)**. Revisa el archivo [LICENSE](LICENSE) para más detalles.
+1. Download the `girosur-barometer-1.0.0.plasmoid` file from the [Releases](https://github.com/teovisaires/girosur-barometer/releases) section.
+2. Right-click on your KDE Plasma panel -> **Add Widgets...** -> **Get New Widgets...** -> **Install from local file...** and select the `.plasmoid` file.
 
 ---
 
-## 👤 Autor
+## 📄 License
 
-Desarrollado por **Teodoro Visaires** (<teovisaires@gmx.com>)  
-Proyecto **Giro-Sur**
+Distributed under the **GNU General Public License v2.0 or later (GPL-2.0-or-later)**. See [LICENSE](LICENSE) for details.
+
+---
+
+## 👤 Author
+
+Developed by **Teodoro Visaires** (<teovisaires@gmx.com>)  
+**Giro-Sur Project**

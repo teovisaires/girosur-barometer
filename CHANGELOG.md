@@ -2,10 +2,10 @@
 
 ## Version 1.0.0
 
-* **Diseño e Interfaz**: Dial aneroide marino de alta resolución con lecturas en hectopascal (hPa).
-* **Aguja Principal (Presión Actual)**: Aguja azul de alta precisión animada suavemente con efecto de física analógica.
-* **Aguja de Referencia (Memoria)**: Aguja dorada orientable para marcar lecturas previas y comparar la evolución barométrica.
-* **Motor Meteorológico**: Datos atmosféricos en tiempo real vía Open-Meteo API sin necesidad de claves API externas.
-* **Indicador de Tendencia**: Cálculo de la tendencia barométrica en las últimas 3 horas (Subiendo ↗, Estable ➔, Bajando ↘) e indicador directo en el dial.
-* **Buscador de Ubicación**: Selector interactivo de ciudades y coordenadas geográficas con fallback automático.
-* **Lanzamiento Inicial**: Widget compatible con KDE Plasma 5 y Plasma 6.
+* **Design & Interface**: High-resolution marine aneroid dial with readings in hectopascals (hPa).
+* **Main Pressure Hand**: High-precision blue hand smoothly animated with analog physics effect.
+* **Reference (Memory) Hand**: Adjustable gold hand to mark baseline readings and track pressure movement over time.
+* **Weather Engine**: Real-time atmospheric pressure data via Open-Meteo API without requiring external API keys.
+* **Trend Indicator**: 3-hour barometric trend calculation (Rising ↗, Steady ➔, Falling ↘) with direct visual feedback.
+* **Location Search**: Interactive city search and geographic coordinate lookup with automatic fallback.
+* **Initial Release**: Widget fully compatible with KDE Plasma 5 and Plasma 6.

@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Barómetro Giro-Sur
+Name=Giro-Sur Barometer
 Name[es]=Barómetro Giro-Sur
-Comment=Barómetro marino analógico aneroide con presión atmosférica en tiempo real
+Comment=Real-time analog marine aneroid barometer with atmospheric pressure
 Comment[es]=Barómetro marino analógico aneroide con presión atmosférica en tiempo real
 Type=Service
 Icon=weather-clear
