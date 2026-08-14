@@ -8,4 +8,4 @@
 * **Double-Click Alignment**: Double-clicking the widget instantly matches the gold reference hand with the current pressure hand to establish a new baseline.
 * **Weather Engine**: Real-time atmospheric pressure data via Open-Meteo API without requiring external API keys.
 * **Location Search**: Interactive city search and geographic coordinate lookup with automatic fallback.
-* **Initial Release**: Widget fully compatible with KDE Plasma 5 and Plasma 6.
+* **Initial Release**: Widget optimized and tested for KDE Plasma 5.

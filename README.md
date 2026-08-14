@@ -1,6 +1,6 @@
 # Giro-Sur Barometer (Plasma Applet)
 
-**Giro-Sur Barometer** is an analog marine aneroid widget for KDE Plasma that displays real-time atmospheric pressure with a classic, highly detailed interface.
+**Giro-Sur Barometer** is an analog marine aneroid widget for KDE Plasma 5 that displays real-time atmospheric pressure with a classic, highly detailed interface.
 
 Inspired by traditional nautical barometers, it combines the aesthetic charm of physical instrumentation with automatically updated weather data.
 
@@ -14,15 +14,15 @@ Inspired by traditional nautical barometers, it combines the aesthetic charm of 
 - 🎯 **Double-Click Reference Alignment**: Double-clicking anywhere on the widget instantly aligns/matches the gold reference hand with the current pressure hand, making it effortless to establish a baseline for tracking pressure changes.
 - 🌐 **Global Weather Data**: Powered by the public **Open-Meteo API**, featuring easy city search and geographic coordinate lookup.
 - ⚙️ **Flexible Configuration**: Intuitive location picker with live sensor state preview and customizable update frequency.
-- 🖥️ **Plasma Compatibility**: Designed to work seamlessly on KDE Plasma 5 and 6 desktops, panels, and docks.
+- 🖥️ **Plasma 5 Native**: Optimized and tested for KDE Plasma 5 desktops, panels, and docks.
 
 ---
 
 ## 📋 Requirements
 
-- KDE Plasma 5.24+ or Plasma 6
-- Qt / KDE Frameworks
-- Plasma package tool (`kpackagetool5` or `kpackagetool6`)
+- KDE Plasma 5.24+ / 5.27 LTS
+- Qt 5 / KDE Frameworks 5
+- Plasma 5 package tool (`kpackagetool5`)
 
 ---
 
@@ -36,13 +36,9 @@ Inspired by traditional nautical barometers, it combines the aesthetic charm of 
    cd girosur-barometer
    ```
 
-2. Run the installation command for KDE Plasma:
+2. Run the installation command for KDE Plasma 5:
    ```bash
-   # On KDE Plasma 5:
    kpackagetool5 -t Plasma/Applet -i .
-
-   # On KDE Plasma 6:
-   kpackagetool6 -t Plasma/Applet -i .
    ```
 
 3. To update an existing installation:
