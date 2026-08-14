@@ -9,9 +9,9 @@ Inspired by traditional nautical barometers, it combines the aesthetic charm of 
 ## 🌟 Key Features
 
 - 🌊 **Aneroid Marine Dial**: Realistic graphical style calibrated in hectopascals (hPa) with weather condition indicators (*Stormy, Rain, Change, Fair, Very Dry*).
-- 🔵 **Current Pressure Hand**: Smoothly animated blue pointer that responds to real-time atmospheric pressure variations.
-- 🟡 **Reference (Memory) Hand**: Secondary gold hand to manually benchmark pressure trends against previous readings.
-- 📈 **3-Hour Pressure Trend**: Shows whether atmospheric pressure is rising, steady, or falling (essential for forecasting weather fronts and storms).
+- 🔵 **Current Pressure Hand**: Smoothly animated main pointer that responds in real time to atmospheric pressure variations.
+- 🟡 **Reference (Memory) Hand**: Secondary gold hand used to mark baseline readings and visually monitor barometric shifts over time.
+- 🎯 **Double-Click Reference Alignment**: Double-clicking anywhere on the widget instantly aligns/matches the gold reference hand with the current pressure hand, making it effortless to establish a baseline for tracking pressure changes.
 - 🌐 **Global Weather Data**: Powered by the public **Open-Meteo API**, featuring easy city search and geographic coordinate lookup.
 - ⚙️ **Flexible Configuration**: Intuitive location picker with live sensor state preview and customizable update frequency.
 - 🖥️ **Plasma Compatibility**: Designed to work seamlessly on KDE Plasma 5 and 6 desktops, panels, and docks.
