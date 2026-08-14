@@ -1,0 +1,27 @@
+[Desktop Entry]
+Name=Barómetro Giro-Sur
+Name[es]=Barómetro Giro-Sur
+Comment=Barómetro marino analógico aneroide con presión atmosférica en tiempo real
+Comment[es]=Barómetro marino analógico aneroide con presión atmosférica en tiempo real
+Type=Service
+Icon=weather-clear
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+
+X-Plasma-Provides=org.kde.plasma.weather
+X-Plasma-StandAloneApp=true
+
+X-KDE-PluginInfo-Name=org.girosur.barometer
+X-KDE-PluginInfo-Version=1.0.0
+X-KDE-PluginInfo-Author=Teodoro Visaires
+X-KDE-PluginInfo-Email=teovisaires@gmx.com
+X-KDE-PluginInfo-License=GPL-2.0-or-later
+X-KDE-PluginInfo-EnabledByDefault=true
+
+X-KDE-FormFactors=desktop,tablet,handset,mediacenter
+X-KDE-Keywords=barometer;barómetro;weather;clima;presion;atmospheric;girosur;funes;
+
+[X-Plasma-ConfigDialog]
+InitialPage=General

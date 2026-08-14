@@ -1,0 +1,32 @@
+# KDE/Plasma & editores
+*.kcache
+*.kate-swp
+*.swp
+*~
+.#*
+*.orig
+
+# Archivos temporales de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Comprimidos y paquetes generados (.plasmoid)
+*.tar
+*.tar.gz
+*.zip
+*.plasmoid
+
+# Node / Tools
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+logs/
