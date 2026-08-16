@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    GiroSur Barometer – Marine Aneroid Barometer Plasmoid
+    Barómetro Marino Aneroide “GiroSur” para KDE Plasma
+    Copyright (C) 2026 Teodoro Visaires <teovisaires@gmx.com>
+    Created in pair programming with Antigravity (Google DeepMind)
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
@@ -7,19 +28,19 @@
 
   <group name="General">
     <entry name="countryName" type="String">
-      <default>Argentina</default>
+      <default></default>
     </entry>
     <entry name="cityName" type="String">
-      <default>Funes, Santa Fe, Argentina</default>
+      <default></default>
     </entry>
     <entry name="coordinates" type="String">
-      <default>-32.9157,-60.8100</default>
+      <default></default>
     </entry>
     <entry name="latitude" type="String">
-      <default>-32.9157</default>
+      <default></default>
     </entry>
     <entry name="longitude" type="String">
-      <default>-60.8100</default>
+      <default></default>
     </entry>
     <entry name="updateInterval" type="Int">
       <default>15</default>

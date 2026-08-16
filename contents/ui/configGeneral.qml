@@ -1,3 +1,25 @@
+/*
+ *   GiroSur Barometer – Marine Aneroid Barometer Plasmoid
+ *   Barómetro Marino Aneroide “GiroSur” para KDE Plasma
+ *   Copyright (C) 2026 Teodoro Visaires <teovisaires@gmx.com>
+ *   Created in pair programming with Antigravity (Google DeepMind)
+ *
+ *   SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import QtQuick 2.12
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.12
@@ -10,11 +32,12 @@ Item {
     height: 520
 
     // Plasma Configuration Bindings (cfg_<entryName> automatically binds to plasmoid.configuration.<entryName>)
-    property string cfg_countryName: "Búsqueda Global"
-    property string cfg_cityName: "Funes, Santa Fe, Argentina"
-    property string cfg_coordinates: "-32.9157,-60.8100"
-    property string cfg_latitude: "-32.9157"
-    property string cfg_longitude: "-60.8100"
+    property string cfg_countryName: ""
+    property string cfg_cityName: ""
+    property string cfg_coordinates: ""
+    property string cfg_latitude: ""
+    property string cfg_longitude: ""
+    property string cfg_referencePressure: "1013.25"
     property alias cfg_updateInterval: intervalSpin.value
 
     ListModel {
@@ -31,7 +54,7 @@ Item {
             spacing: 16
 
             PlasmaComponents.Label {
-                text: i18n("Configuración de Ubicación y Barómetro")
+                text: i18n("Location & Barometer Settings")
                 font.bold: true
                 font.pixelSize: 15
             }
@@ -51,7 +74,7 @@ Item {
                     spacing: 10
 
                     PlasmaComponents.Label {
-                        text: i18n("Buscar cualquier ciudad del mundo:")
+                        text: i18n("Search any city in the world:")
                         font.bold: true
                         font.pixelSize: 13
                     }
@@ -63,7 +86,7 @@ Item {
                         PlasmaComponents.TextField {
                             id: searchInput
                             Layout.fillWidth: true
-                            placeholderText: i18n("Escribe una ciudad (ej: Funes, Montevideo, Tokio, Barcelona)...")
+                            placeholderText: i18n("Type a city (e.g. London, Tokyo, New York, Buenos Aires)...")
 
                             onTextChanged: {
                                 if (text.length >= 2) {
@@ -80,7 +103,7 @@ Item {
                         }
 
                         PlasmaComponents.Button {
-                            text: i18n("Buscar")
+                            text: i18n("Search")
                             iconName: "system-search"
                             onClicked: {
                                 searchTimer.stop();
@@ -177,7 +200,7 @@ Item {
                     spacing: 12
 
                     PlasmaComponents.Label {
-                        text: i18n("Detalles de la Ubicación Configurada:")
+                        text: i18n("Configured Location Details:")
                         font.bold: true
                     }
 
@@ -187,7 +210,7 @@ Item {
                         columnSpacing: 12
                         rowSpacing: 10
 
-                        PlasmaComponents.Label { text: i18n("Ciudad:") }
+                        PlasmaComponents.Label { text: i18n("City:") }
                         PlasmaComponents.TextField {
                             id: cityNameField
                             Layout.fillWidth: true
@@ -201,19 +224,19 @@ Item {
                             }
                         }
 
-                        PlasmaComponents.Label { text: i18n("Latitud:") }
+                        PlasmaComponents.Label { text: i18n("Latitude:") }
                         PlasmaComponents.TextField {
                             id: latField
                             Layout.fillWidth: true
                         }
 
-                        PlasmaComponents.Label { text: i18n("Longitud:") }
+                        PlasmaComponents.Label { text: i18n("Longitude:") }
                         PlasmaComponents.TextField {
                             id: lonField
                             Layout.fillWidth: true
                         }
 
-                        PlasmaComponents.Label { text: i18n("Intervalo de actualización (min):") }
+                        PlasmaComponents.Label { text: i18n("Update Interval (min):") }
                         QQC2.SpinBox {
                             id: intervalSpin
                             from: 1
@@ -229,32 +252,31 @@ Item {
 
     function geocodeCityName(query) {
         if (!query || query.trim().length < 2) return;
-        var url = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(query.trim()) + "&count=1&language=es";
+        var urlPrimary = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(query.trim()) + "&count=1&language=es";
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
+        xhr.open("GET", urlPrimary, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 try {
                     var data = JSON.parse(xhr.responseText);
                     if (data.results && data.results.length > 0) {
-                        var item = data.results[0];
-                        var nameParts = [];
-                        if (item.name) nameParts.push(item.name);
-                        if (item.admin1 && item.admin1 !== item.name) nameParts.push(item.admin1);
-                        if (item.country) nameParts.push(item.country);
-                        var fullName = nameParts.join(", ");
-                        
-                        var latStr = parseFloat(item.latitude).toFixed(4);
-                        var lonStr = parseFloat(item.longitude).toFixed(4);
-                        configPage.cfg_cityName = fullName;
-                        configPage.cfg_latitude = latStr;
-                        configPage.cfg_longitude = lonStr;
-                        configPage.cfg_coordinates = latStr + "," + lonStr;
-                        configPage.cfg_countryName = item.country || "Global";
-
-                        cityNameField.text = fullName;
-                        latField.text = latStr;
-                        lonField.text = lonStr;
+                        applyGeocodeResult(data.results[0]);
+                    } else {
+                        // Fallback without language filter
+                        var urlFallback = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(query.trim()) + "&count=1";
+                        var xhr2 = new XMLHttpRequest();
+                        xhr2.open("GET", urlFallback, true);
+                        xhr2.onreadystatechange = function() {
+                            if (xhr2.readyState === XMLHttpRequest.DONE && xhr2.status === 200) {
+                                try {
+                                    var data2 = JSON.parse(xhr2.responseText);
+                                    if (data2.results && data2.results.length > 0) {
+                                        applyGeocodeResult(data2.results[0]);
+                                    }
+                                } catch(e2) {}
+                            }
+                        };
+                        xhr2.send();
                     }
                 } catch(e) {
                     console.log("Error auto-geocoding city:", e);
@@ -264,32 +286,57 @@ Item {
         xhr.send();
     }
 
+    function applyGeocodeResult(item) {
+        var nameParts = [];
+        if (item.name) nameParts.push(item.name);
+        if (item.admin1 && item.admin1 !== item.name) nameParts.push(item.admin1);
+        if (item.country) nameParts.push(item.country);
+        var fullName = nameParts.join(", ");
+        
+        var latStr = parseFloat(item.latitude).toFixed(4);
+        var lonStr = parseFloat(item.longitude).toFixed(4);
+        configPage.cfg_cityName = fullName;
+        configPage.cfg_latitude = latStr;
+        configPage.cfg_longitude = lonStr;
+        configPage.cfg_coordinates = latStr + "," + lonStr;
+        configPage.cfg_countryName = item.country || "Global";
+
+        cityNameField.text = fullName;
+        latField.text = latStr;
+        lonField.text = lonStr;
+    }
+
     function performSearch(query) {
         if (!query || query.trim().length < 2) return;
-        var url = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(query.trim()) + "&count=10&language=es";
+        var urlPrimary = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(query.trim()) + "&count=10&language=es";
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
+        xhr.open("GET", urlPrimary, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 try {
                     var data = JSON.parse(xhr.responseText);
-                    suggestionsModel.clear();
                     if (data.results && data.results.length > 0) {
-                        for (var i = 0; i < data.results.length; i++) {
-                            var item = data.results[i];
-                            var nameParts = [];
-                            if (item.name) nameParts.push(item.name);
-                            if (item.admin1 && item.admin1 !== item.name) nameParts.push(item.admin1);
-                            if (item.country) nameParts.push(item.country);
-                            
-                            var fullName = nameParts.join(", ");
-                            suggestionsModel.append({
-                                displayName: fullName,
-                                lat: parseFloat(item.latitude),
-                                lon: parseFloat(item.longitude),
-                                country: item.country || ""
-                            });
-                        }
+                        populateSuggestions(data.results);
+                    } else {
+                        // Fallback without language filter
+                        var urlFallback = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(query.trim()) + "&count=10";
+                        var xhr2 = new XMLHttpRequest();
+                        xhr2.open("GET", urlFallback, true);
+                        xhr2.onreadystatechange = function() {
+                            if (xhr2.readyState === XMLHttpRequest.DONE && xhr2.status === 200) {
+                                try {
+                                    var data2 = JSON.parse(xhr2.responseText);
+                                    if (data2.results && data2.results.length > 0) {
+                                        populateSuggestions(data2.results);
+                                    } else {
+                                        suggestionsModel.clear();
+                                    }
+                                } catch(e2) {
+                                    suggestionsModel.clear();
+                                }
+                            }
+                        };
+                        xhr2.send();
                     }
                 } catch(e) {
                     console.log("Error parsing geocoding response:", e);
@@ -297,5 +344,24 @@ Item {
             }
         };
         xhr.send();
+    }
+
+    function populateSuggestions(results) {
+        suggestionsModel.clear();
+        for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var nameParts = [];
+            if (item.name) nameParts.push(item.name);
+            if (item.admin1 && item.admin1 !== item.name) nameParts.push(item.admin1);
+            if (item.country) nameParts.push(item.country);
+            
+            var fullName = nameParts.join(", ");
+            suggestionsModel.append({
+                displayName: fullName,
+                lat: parseFloat(item.latitude),
+                lon: parseFloat(item.longitude),
+                country: item.country || ""
+            });
+        }
     }
 }
