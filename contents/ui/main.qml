@@ -81,7 +81,7 @@ Item {
             id: dialBase
             anchors.fill: parent
             source: "../images/barometro_sin_agujas.png"
-            cache: false
+            cache: true
             fillMode: Image.PreserveAspectFit
             smooth: true
             z: 0
@@ -92,7 +92,7 @@ Item {
             id: pressureNeedle
             anchors.fill: parent
             source: "../images/classic_needle.png"
-            cache: false
+            cache: true
             fillMode: Image.PreserveAspectFit
             smooth: true
             transformOrigin: Item.Center
@@ -109,7 +109,7 @@ Item {
             id: referenceNeedle
             anchors.fill: parent
             source: "../images/reference_needle.png"
-            cache: false
+            cache: true
             fillMode: Image.PreserveAspectFit
             smooth: true
             transformOrigin: Item.Center

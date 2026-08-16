@@ -21,8 +21,10 @@
 [Desktop Entry]
 Name=Barómetro Giro-Sur
 Name[es]=Barómetro Giro-Sur
+Name[en]=Giro-Sur Barometer
 Comment=Barómetro marino analógico aneroide con presión atmosférica en tiempo real
 Comment[es]=Barómetro marino analógico aneroide con presión atmosférica en tiempo real
+Comment[en]=Analog marine aneroid barometer with real-time atmospheric pressure
 Type=Service
 Icon=weather-clear
 X-KDE-ServiceTypes=Plasma/Applet
